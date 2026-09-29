@@ -33,10 +33,11 @@ npm run test:docker
 - Isolated Docker stack: real MCP SDK clients verified cross-client save/search/get, updates, deletes, pagination, direct database contents, auth, network guards, and data survival after container recreation. The default legacy volume name is also asserted.
 - Codex plugin/skill validators and Claude Code's plugin/marketplace validators pass. These are packaging checks, not a fresh natural-language conversation test in either product.
 - Dependency audit reports zero known vulnerabilities at verification time. Distribution and actual package-manifest checks pass; no user database or environment secrets are included.
-- GitHub repository renamed to `darkrishabh/simpleagentstore`; private vulnerability reporting, secret scanning and push protection confirmed enabled.
+- GitHub repository renamed to `darkrishabh/simple-agent-store`; private vulnerability reporting, secret scanning and push protection confirmed enabled.
 - Dashboard wordmark and new SVG README banner visually checked against an isolated empty database.
+- A clean clone with no local dependencies or environment files passed `npm ci` and the complete release gate.
 
-Before publishing: require both GitHub CI jobs to pass on the final commit, complete the fresh-clone gate, and create the release/tag through the documented checklist. Domain registration is not website or hosted-MCP deployment.
+Before publishing: require both GitHub CI jobs to pass on the final commit and create the release/tag through the documented checklist. Domain registration is not website or hosted-MCP deployment.
 
 ## Explicit alpha limitations
 

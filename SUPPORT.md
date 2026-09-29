@@ -2,7 +2,7 @@
 
 SimpleAgentStore is a community open-source alpha and is provided without a support SLA.
 
-- Use [GitHub Issues](https://github.com/darkrishabh/simpleagentstore/issues) for reproducible bugs and focused feature proposals.
+- Use [GitHub Issues](https://github.com/darkrishabh/simple-agent-store/issues) for reproducible bugs and focused feature proposals.
 - Check [Getting started](docs/GETTING_STARTED.md) for client connection instructions.
 - Check [Database operations](docs/DATABASE_OPERATIONS.md) before moving, restoring, or repairing a store.
 - Follow [SECURITY.md](SECURITY.md) for vulnerabilities. Never post secrets or private object data in an issue.

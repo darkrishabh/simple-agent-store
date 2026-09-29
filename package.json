@@ -8,10 +8,10 @@
   "author": "Rishabh Mehan",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/darkrishabh/simpleagentstore.git"
+    "url": "git+https://github.com/darkrishabh/simple-agent-store.git"
   },
   "bugs": {
-    "url": "https://github.com/darkrishabh/simpleagentstore/issues"
+    "url": "https://github.com/darkrishabh/simple-agent-store/issues"
   },
   "homepage": "https://simpleagentstore.com",
   "keywords": [

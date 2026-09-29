@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/darkrishabh/simpleagentstore/security/advisories/new
+    url: https://github.com/darkrishabh/simple-agent-store/security/advisories/new
     about: Report vulnerabilities privately; never open a public security issue.
   - name: Setup and support
-    url: https://github.com/darkrishabh/simpleagentstore/blob/main/SUPPORT.md
+    url: https://github.com/darkrishabh/simple-agent-store/blob/main/SUPPORT.md
     about: Read the support guide before opening a bug report.

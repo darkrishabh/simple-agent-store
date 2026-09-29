@@ -19,8 +19,8 @@ Changes that introduce embeddings, RAG, autonomous classification, a knowledge g
 Requires Node.js 22 or later.
 
 ```bash
-git clone https://github.com/darkrishabh/simpleagentstore.git
-cd simpleagentstore
+git clone https://github.com/darkrishabh/simple-agent-store.git
+cd simple-agent-store
 npm ci
 npm run ci
 ```

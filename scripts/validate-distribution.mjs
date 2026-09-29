@@ -39,7 +39,7 @@ assert(pkg.license === "Apache-2.0", "package.json must declare Apache-2.0");
 assert(pkg.name === "simpleagentstore", "package name must match the project");
 assert(pkg.private === true, "source-only release must not accidentally publish to npm");
 assert(pkg.homepage === "https://simpleagentstore.com", "project homepage is incorrect");
-assert(pkg.repository?.url === "git+https://github.com/darkrishabh/simpleagentstore.git", "repository URL is missing");
+assert(pkg.repository?.url === "git+https://github.com/darkrishabh/simple-agent-store.git", "repository URL is missing");
 for (const [name, manifest] of Object.entries({ portable, codex, claude })) {
   assert(manifest.name === "simpleagentstore", `${name} manifest has the wrong name`);
   assert(manifest.version === pkg.version, `${name} version ${manifest.version} does not match core ${pkg.version}`);

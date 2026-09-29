@@ -14,7 +14,7 @@ SimpleAgentStore is pre-1.0 software. Security fixes are applied on `main`; rele
 
 Do not open a public issue for a suspected vulnerability or include real credentials, private objects, or database contents in a report.
 
-Use [GitHub private vulnerability reporting](https://github.com/darkrishabh/simpleagentstore/security/advisories/new). Include:
+Use [GitHub private vulnerability reporting](https://github.com/darkrishabh/simple-agent-store/security/advisories/new). Include:
 
 - affected version or commit;
 - reproduction steps or a minimal proof of concept;

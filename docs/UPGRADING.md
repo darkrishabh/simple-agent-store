@@ -1,15 +1,15 @@
 # Upgrading from AgentStore
 
-The project is now **SimpleAgentStore**, at [darkrishabh/simpleagentstore](https://github.com/darkrishabh/simpleagentstore). Version 0.3.0 prepares the renamed local, single-user alpha. The rename itself does not migrate, copy, or delete stored objects.
+The project is now **SimpleAgentStore**, at [darkrishabh/simple-agent-store](https://github.com/darkrishabh/simple-agent-store). Version 0.3.0 prepares the renamed local, single-user alpha. The rename itself does not migrate, copy, or delete stored objects.
 
 ## Existing checkout
 
 Keep your current directory; renaming it is optional. Update the remote using the transport you already use:
 
 ```bash
-git remote set-url origin https://github.com/darkrishabh/simpleagentstore.git
+git remote set-url origin https://github.com/darkrishabh/simple-agent-store.git
 # For an existing SSH remote instead:
-# git remote set-url origin git@github.com:darkrishabh/simpleagentstore.git
+# git remote set-url origin git@github.com:darkrishabh/simple-agent-store.git
 ```
 
 Back up first, review local changes, and follow your normal Git update workflow. Never reset local changes just to update. GitHub redirects the previous repository URL, but use the new URL for integrations and fresh clones.
@@ -34,7 +34,7 @@ Stop your existing dashboard and MCP processes, take a [verified backup](DATABAS
 
 ### Docker installations
 
-The Compose file now explicitly pins the original default project name, so cloning or renaming the folder to `simpleagentstore` does not silently create a new empty volume.
+The Compose file now explicitly pins the original default project name, so cloning or renaming the folder to `simple-agent-store` does not silently create a new empty volume.
 
 If you previously used a custom directory-derived project name, `-p`, or `COMPOSE_PROJECT_NAME`, **continue supplying that exact project name**. Inspect `docker compose ls` and `docker volume ls` before starting; do not guess. For example, an existing project named `my-store` must still use `docker compose -p my-store ...`.
 

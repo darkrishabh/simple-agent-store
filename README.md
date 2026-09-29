@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/darkrishabh/simpleagentstore/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/darkrishabh/simpleagentstore/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status" /></a>
+  <a href="https://github.com/darkrishabh/simple-agent-store/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/darkrishabh/simple-agent-store/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-f4b860?style=flat-square" alt="Apache License 2.0" /></a>
   <img src="https://img.shields.io/badge/status-open--source_alpha-6b7280?style=flat-square" alt="Status: open-source alpha" />
   <img src="https://img.shields.io/badge/Node.js-22%2B-339933?style=flat-square" alt="Node.js 22 or later" />
@@ -57,8 +57,8 @@ Previously named AgentStore? See the [rename and upgrade guide](./docs/UPGRADING
 Requires Docker with Compose v2. No Node.js or database installation needed:
 
 ```bash
-git clone https://github.com/darkrishabh/simpleagentstore.git
-cd simpleagentstore
+git clone https://github.com/darkrishabh/simple-agent-store.git
+cd simple-agent-store
 docker compose up --build -d --wait
 ```
 
@@ -73,8 +73,8 @@ Stop with `docker compose down`; your data stays. See [Docker setup and backups]
 Requires **Node.js 22+**. Do not run this alongside Docker on the same ports:
 
 ```bash
-git clone https://github.com/darkrishabh/simpleagentstore.git
-cd simpleagentstore
+git clone https://github.com/darkrishabh/simple-agent-store.git
+cd simple-agent-store
 npm ci
 npm run dashboard
 ```

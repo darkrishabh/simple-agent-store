@@ -42,5 +42,5 @@ All notable changes to SimpleAgentStore are documented here. The project follows
 
 - Loopback defaults, optional bearer-token authentication, environment-only tunnel configuration, and secret/data exclusions.
 
-[Unreleased]: https://github.com/darkrishabh/simpleagentstore/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/darkrishabh/simpleagentstore/releases/tag/v0.2.0
+[Unreleased]: https://github.com/darkrishabh/simple-agent-store/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/darkrishabh/simple-agent-store/releases/tag/v0.2.0
