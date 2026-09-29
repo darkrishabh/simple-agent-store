@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="title desc">
+  <title id="title">SimpleAgentStore — Dead simple agent storage.</title>
+  <desc id="desc">Claude, Codex and other agents connect to one user-owned SQLite object store. Put, get, list, search, delete. Your data. Any agent.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#242b35" stroke-width=".6"/></pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="none" stroke="#c5ff75" stroke-width="1.5"/></marker>
+  </defs>
+  <rect width="1200" height="400" rx="18" fill="#111820"/>
+  <rect x="600" width="600" height="400" rx="18" fill="url(#grid)"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="52" y="45" width="23" height="23" rx="5" fill="#c5ff75"/>
+    <path d="M58 52H69M58 57H69M58 62H65" stroke="#111820" stroke-width="2"/>
+    <text x="86" y="63" fill="#f6f8f9" font-size="22" font-weight="700">SimpleAgentStore</text>
+    <text x="52" y="158" fill="#f6f8f9" font-size="60" font-weight="700" letter-spacing="-2">Dead simple</text>
+    <text x="52" y="223" fill="#c5ff75" font-size="60" font-weight="700" letter-spacing="-2">agent storage.</text>
+    <text x="55" y="267" fill="#acb8c5" font-size="21">Your data. Any agent.</text>
+    <text x="55" y="348" fill="#acb8c5" font-family="monospace" font-size="13" letter-spacing="1">OPEN SOURCE / LOCAL FIRST / SQLITE + MCP</text>
+    <g fill="#19232f" stroke="#3e4d5f">
+      <rect x="661" y="59" width="135" height="48" rx="8"/>
+      <rect x="820" y="59" width="135" height="48" rx="8"/>
+      <rect x="979" y="59" width="165" height="48" rx="8"/>
+    </g>
+    <g fill="#f6f8f9" text-anchor="middle" font-family="monospace" font-size="16">
+      <text x="728" y="89">Claude</text><text x="887" y="89">Codex</text><text x="1061" y="89">Your agent</text>
+    </g>
+    <path d="M728 107V145H887M1061 107V145H887M887 107V189" stroke="#c5ff75" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+    <rect x="765" y="197" width="244" height="99" rx="10" fill="#19232f" stroke="#c5ff75"/>
+    <text x="787" y="225" font-family="monospace" font-size="12" fill="#c5ff75">YOUR STORE</text>
+    <text x="787" y="257" font-family="monospace" font-size="17" fill="#f6f8f9">{ key, kind, value }</text>
+    <text x="787" y="281" font-family="monospace" font-size="12" fill="#acb8c5">notes · todos · references</text>
+    <text x="887" y="348" text-anchor="middle" font-family="monospace" font-size="14" fill="#acb8c5">put · get · list · search · delete</text>
+  </g>
+</svg>

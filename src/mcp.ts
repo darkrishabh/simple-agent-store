@@ -67,7 +67,7 @@ export const MCP_SERVER_INSTRUCTIONS =
 export function createAgentStoreServer(databasePath: string, sharedStore?: AgentStore): McpServer {
   const store = sharedStore ?? new AgentStore(databasePath);
   const server = new McpServer(
-    { name: "agentstore", version: "0.2.0" },
+    { name: "simpleagentstore", version: "0.3.0" },
     {
       instructions: MCP_SERVER_INSTRUCTIONS,
     },
@@ -79,7 +79,8 @@ export function createAgentStoreServer(databasePath: string, sharedStore?: Agent
       description:
         "Use this whenever the user explicitly asks to save, store, remember, preserve, or keep information for later. Preserve original information and wording where practical; do not summarize away important details. Choose a concise stable key, choose kind by behavioral intent, add useful entity/category labels, and never invent facts. Do not claim success unless this tool succeeds.",
       inputSchema: putSchema,
-      annotations: { destructiveHint: false, idempotentHint: true },
+      // Upsert replaces the existing value and increments its version on every call.
+      annotations: { destructiveHint: true, idempotentHint: false },
     },
     async (input) =>
       asToolResult(() => ({

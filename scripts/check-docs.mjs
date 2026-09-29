@@ -32,6 +32,7 @@ function githubSlug(value) {
 const files = [
   ...rootDocuments.filter(existsSync).map((path) => resolve(path)),
   ...markdownFiles(resolve("docs")),
+  ...markdownFiles(resolve("plugins")),
 ];
 const failures = [];
 

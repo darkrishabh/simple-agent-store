@@ -1,5 +1,5 @@
 name: Bug report
-description: Report reproducible incorrect AgentStore behavior
+description: Report reproducible incorrect SimpleAgentStore behavior
 title: "[Bug]: "
 labels: [bug]
 body:
@@ -9,7 +9,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: AgentStore version or commit
+      label: SimpleAgentStore version or commit
       placeholder: 0.2.0 or commit SHA
     validations:
       required: true

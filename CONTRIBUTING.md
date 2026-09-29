@@ -1,6 +1,6 @@
-# Contributing to AgentStore
+# Contributing to SimpleAgentStore
 
-Thanks for helping make AgentStore simpler, safer, and more useful across agents.
+Thanks for helping make SimpleAgentStore simpler, safer, and more useful across agents.
 
 ## Before opening a change
 
@@ -10,7 +10,7 @@ Thanks for helping make AgentStore simpler, safer, and more useful across agents
 
 ## Product boundary
 
-AgentStore is a deterministic, user-owned object store. Natural-language interpretation belongs in the calling agent. The core executes structured filters and lexical retrieval.
+SimpleAgentStore is a deterministic, user-owned object store. Natural-language interpretation belongs in the calling agent. The core executes structured filters and lexical retrieval.
 
 Changes that introduce embeddings, RAG, autonomous classification, a knowledge graph, workflow execution, or a hosted multi-user control plane are outside the core unless the project scope is explicitly changed first.
 
@@ -19,8 +19,8 @@ Changes that introduce embeddings, RAG, autonomous classification, a knowledge g
 Requires Node.js 22 or later.
 
 ```bash
-git clone https://github.com/darkrishabh/agentstore.git
-cd agentstore
+git clone https://github.com/darkrishabh/simpleagentstore.git
+cd simpleagentstore
 npm ci
 npm run ci
 ```

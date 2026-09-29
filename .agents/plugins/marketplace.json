@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "agentstore",
+      "name": "simpleagentstore",
       "source": {
         "source": "local",
-        "path": "./plugins/agentstore"
+        "path": "./plugins/simpleagentstore"
       },
       "policy": {
         "installation": "AVAILABLE",

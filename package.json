@@ -1,6 +1,6 @@
 {
-  "name": "agentstore",
-  "version": "0.2.0",
+  "name": "simpleagentstore",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "A deterministic, user-owned object store for AI agents.",
@@ -8,12 +8,12 @@
   "author": "Rishabh Mehan",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/darkrishabh/agentstore.git"
+    "url": "git+https://github.com/darkrishabh/simpleagentstore.git"
   },
   "bugs": {
-    "url": "https://github.com/darkrishabh/agentstore/issues"
+    "url": "https://github.com/darkrishabh/simpleagentstore/issues"
   },
-  "homepage": "https://github.com/darkrishabh/agentstore#readme",
+  "homepage": "https://simpleagentstore.com",
   "keywords": [
     "agents",
     "mcp",
@@ -30,7 +30,8 @@
     "mcp:http": "node --env-file-if-exists=.env --env-file-if-exists=.env.local --import tsx src/mcp-http.ts",
     "test:docker": "node scripts/test-docker.mjs",
     "mcp:tunnel": "node --env-file-if-exists=.env.local scripts/run-tunnel.mjs",
-    "release:check": "npm run ci && npm audit --audit-level=high && npm pack --dry-run",
+    "release:check": "npm run ci && npm audit --audit-level=high && npm run pack:check",
+    "pack:check": "node scripts/check-package.mjs",
     "seed": "tsx src/seed-and-test.ts",
     "test": "vitest run",
     "validate:distribution": "node scripts/validate-distribution.mjs"

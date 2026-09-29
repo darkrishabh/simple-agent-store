@@ -117,6 +117,54 @@ describe("AgentStore", () => {
     ]);
   });
 
+  it("normalizes list date offsets just like search", () => {
+    putFixture(store, { dueAt: "2026-09-05T11:00:00Z" });
+    putFixture(store, { key: "later", dueAt: "2026-09-05T13:00:00Z" });
+    const filter = { dueBefore: "2026-09-05T14:00:00+02:00" };
+    expect(store.listPage(filter).objects.map((item) => item.key)).toEqual(["mike-plumber-contact"]);
+    expect(store.listPage(filter).totalCount).toBe(1);
+    expect(store.search(filter).map((item) => item.key)).toEqual(["mike-plumber-contact"]);
+    expect(() => store.listPage({ dueBefore: "not-a-date" })).toThrow("dueBefore");
+  });
+
+  it("prioritizes the named contact over other phone-shaped candidates", () => {
+    putFixture(store, { key: "alice-contact", searchableText: "Alice at 415-555-0999", labels: ["alice"] });
+    putFixture(store);
+    const results = store.search({ query: "Mike phone" });
+    expect(results[0]?.key).toBe("mike-plumber-contact");
+    expect(store.get(results[0]!.key)?.value.phone).toBe("415-555-0123");
+  });
+
+  it("treats SQL wildcards in key prefixes literally", () => {
+    putFixture(store, { key: "notes_100%/real" });
+    putFixture(store, { key: "notesX100X/decoy" });
+    expect(store.search({ keyPrefix: "notes_100%/" }).map((item) => item.key)).toEqual(["notes_100%/real"]);
+  });
+
+  it("does not replace existing values when an update fails validation", () => {
+    const before = putFixture(store);
+    expect(() => putFixture(store, { dueAt: "invalid" })).toThrow();
+    expect(store.get(before.key)).toEqual(before);
+    expect(store.search({ query: "kitchen" })[0]?.key).toBe(before.key);
+  });
+
+  it("paginates combined filters across tied timestamps without leaking expired objects", () => {
+    for (let i = 0; i < 7; i++) putFixture(store, { key: `todo-${i}`, kind: "todo", completed: false, labels: ["launch"] });
+    putFixture(store, { key: "expired", kind: "todo", completed: false, labels: ["launch"], expiresAt: "2020-01-01T00:00:00Z" });
+    putFixture(store, { key: "finished", kind: "todo", completed: true, labels: ["launch"] });
+    putFixture(store, { key: "different-label", kind: "todo", completed: false, labels: ["other"] });
+    const keys: string[] = [];
+    let cursor: string | undefined;
+    do {
+      const page = store.listPage({ kind: ["todo"], labels: ["launch"], completed: false, limit: 2, cursor });
+      expect(page.totalCount).toBe(7);
+      keys.push(...page.objects.map((item) => item.key));
+      cursor = page.nextCursor ?? undefined;
+    } while (cursor);
+    expect(keys).toEqual(Array.from({ length: 7 }, (_, i) => `todo-${i}`));
+    expect(store.stats().total).toBe(9);
+  });
+
   it("filters by completion state", () => {
     putFixture(store, { kind: "reminder", completed: false });
     putFixture(store, { key: "done", kind: "reminder", completed: true });
@@ -251,6 +299,7 @@ describe("AgentStore schema migration", () => {
 
     const migrated = new AgentStore(path);
     try {
+      expect(migrated.get("legacy-contact")).toMatchObject({ id: "legacy-id", version: 1, value: { phone: "415-555-0199" }, createdAt: "2026-08-01T00:00:00.000Z" });
       expect(migrated.search({ labels: ["legacy-label"] })[0]?.key).toBe("legacy-contact");
       expect(migrated.search({ query: "phone number" })[0]?.match.matchedFields).toContain("phone_shape");
     } finally {

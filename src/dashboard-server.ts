@@ -37,7 +37,7 @@ const server = createServer(async (request, response) => {
 
 server.listen(port, host, () => {
   const address = server.address();
-  console.log(`AgentStore dashboard: http://127.0.0.1:${typeof address === "object" && address ? address.port : port}`);
+  console.log(`SimpleAgentStore dashboard: http://127.0.0.1:${typeof address === "object" && address ? address.port : port}`);
   console.log(`Database: ${databasePath}`);
 });
 

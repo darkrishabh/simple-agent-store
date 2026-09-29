@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "simpleagentstore",
+  "version": "0.3.0",
+  "description": "Local SimpleAgentStore MCP connection with reliable save and retrieval routing.",
+  "author": {
+    "name": "Rishabh Mehan"
+  },
+  "keywords": ["simpleagentstore", "object-store", "mcp", "notes", "todos"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "SimpleAgentStore",
+        "shortDescription": "Save and retrieve portable user-owned objects.",
+        "longDescription": "Connects to your local SimpleAgentStore MCP server and routes explicit saves and reliable paginated retrieval. Start the server separately with Docker Compose or Node.js.",
+        "developerName": "Rishabh Mehan",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": [
+          "Save this to my SimpleAgentStore notes.",
+          "Show me all my saved notes."
+        ]
+      }
+    }
+  }
+}

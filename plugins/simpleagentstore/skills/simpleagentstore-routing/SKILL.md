@@ -1,11 +1,11 @@
 ---
-name: agentstore-routing
-description: Route explicit save, remember, todo, note, and later-retrieval requests through an already-connected AgentStore MCP server. Use when the user asks to store information for later, retrieve saved objects, show all notes or todos, find a saved entity or contact field, or delete a saved object.
+name: simpleagentstore-routing
+description: Route explicit save, remember, todo, note, and later-retrieval requests through an already-connected SimpleAgentStore MCP server. Use when the user asks to store information for later, retrieve saved objects, show all notes or todos, find a saved entity or contact field, or delete a saved object.
 ---
 
-# AgentStore Routing
+# SimpleAgentStore Routing
 
-Use AgentStore as a user-owned object store, not as implicit conversational memory. Natural-language interpretation stays here in the agent; send deterministic fields to the store.
+Use SimpleAgentStore as a user-owned object store, not as implicit conversational memory. Natural-language interpretation stays here in the agent; send deterministic fields to the store.
 
 ## Save
 
@@ -33,4 +33,4 @@ When the user explicitly asks to save, store, remember, preserve, keep, add a no
 
 Resolve an ambiguous description with `search_objects`, identify the exact key, and call `delete_object` only when deletion is the user's intent. Report the tool's actual result.
 
-If AgentStore tools are unavailable, say that the AgentStore MCP connection must be enabled. Do not claim persistence through workspace memory or another storage system.
+If SimpleAgentStore tools are unavailable, say that the SimpleAgentStore MCP connection must be enabled. Do not claim persistence through workspace memory or another storage system.

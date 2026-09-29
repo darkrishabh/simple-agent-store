@@ -2,16 +2,16 @@
 
 ## North star
 
-AgentStore is a deliberately small, user-owned object store shared by AI agents. Agents interpret natural language; AgentStore executes deterministic storage and retrieval operations.
+SimpleAgentStore is a deliberately small, user-owned object store shared by AI agents. Agents interpret natural language; SimpleAgentStore executes deterministic storage and retrieval operations.
 
 ```text
 Codex ─┐
-Claude ├── MCP adapter ── AgentStore core ── SQLite + FTS5
+Claude ├── MCP adapter ── SimpleAgentStore core ── SQLite + FTS5
 Other ─┘                         │
                                 └── local CRUD dashboard
 ```
 
-MCP and the dashboard are adapters. The TypeScript `AgentStore` class is the core contract. SQLite is the MVP backend, not a permanent protocol constraint.
+MCP and the dashboard are adapters. The TypeScript `AgentStore` class is the core contract; its exported name stays compatible across the project rename. SQLite is the MVP backend, not a permanent protocol constraint.
 
 ## Components
 
@@ -23,12 +23,12 @@ MCP and the dashboard are adapters. The TypeScript `AgentStore` class is the cor
 | `src/mcp-http.ts` | Loopback Streamable HTTP transport, origin/host checks, and optional bearer-token authentication. |
 | `src/dashboard-server.ts` and `web/` | Local inspection and CRUD interface over the core. |
 | `src/config.ts` | Shared persistent SQLite file, port, and bind-host settings for adapters. |
-| `plugins/agentstore/` | Optional routing skill and default local MCP connection; it does not contain credentials or host the store. |
+| `plugins/simpleagentstore/` | Optional routing skill and default local MCP connection; it does not contain credentials or host the store. |
 | `compose.yaml` and `Dockerfile` | Local MCP/dashboard packaging with a shared SQLite volume and loopback port publishing. |
 
 ## Object contract
 
-Callers own stable keys. A write contains a canonical kind, arbitrary JSON object value, explicit searchable text, labels, and optional behavioral metadata. AgentStore adds an immutable ID, timestamps, and a monotonically increasing version. Writing an existing key is an upsert and preserves its ID and creation time.
+Callers own stable keys. A write contains a canonical kind, arbitrary JSON object value, explicit searchable text, labels, and optional behavioral metadata. SimpleAgentStore adds an immutable ID, timestamps, and a monotonically increasing version. Writing an existing key is an upsert and preserves its ID and creation time.
 
 Kinds are intentionally small: `note`, `todo`, `reminder`, `calendar`, `reference`, and `other`.
 
@@ -40,7 +40,7 @@ Kinds are intentionally small: `note`, `todo`, `reminder`, `calendar`, `referenc
 4. Return metadata, match fields, and snippets—not full values.
 5. Fetch the selected full object by stable key.
 
-Natural-language query rewriting, synonym choice, and relevance judgment remain in the client. AgentStore does not call an LLM or create embeddings.
+Natural-language query rewriting, synonym choice, and relevance judgment remain in the client. SimpleAgentStore does not call an LLM or create embeddings.
 
 ## Persistence and concurrency
 

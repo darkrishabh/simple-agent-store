@@ -208,7 +208,7 @@ export class AgentStore {
         kind: input.kind,
         sourceClient: input.sourceClient,
         labels: input.labels,
-        dueBefore: input.dueBefore,
+        dueBefore: normalizeOptionalTimestamp(input.dueBefore, "dueBefore") ?? undefined,
         completed: input.completed,
       },
       new Date().toISOString(),

@@ -1,8 +1,14 @@
 # Changelog
 
-All notable changes to AgentStore are documented here. The project follows [Semantic Versioning](https://semver.org/) while recognizing that pre-1.0 releases may change the API.
+All notable changes to SimpleAgentStore are documented here. The project follows [Semantic Versioning](https://semver.org/) while recognizing that pre-1.0 releases may change the API.
 
 ## [Unreleased]
+
+### Changed
+
+- Renamed the project, GitHub repository, dashboard, MCP identity and distributed plugins to SimpleAgentStore (`simpleagentstore`); prepared version 0.3.0 and the `simpleagentstore.com` homepage metadata.
+- Kept `AGENTSTORE_*`, the SQLite filename, core class and five tool names compatible. Pinned the original Compose project name to avoid silently replacing the default data volume after a folder rename. Added upgrade instructions for existing installs and custom project names.
+- Updated the README banner and added a fail-closed package-content check to the release gate and CI.
 
 ### Added
 
@@ -12,6 +18,9 @@ All notable changes to AgentStore are documented here. The project follows [Sema
 - Shared native database/port configuration, environment-file examples, Docker operations documentation, and isolated Docker end-to-end tests in CI.
 
 ### Fixed
+
+- List due-date filters now normalize timezone offsets consistently with search and reject invalid dates.
+- MCP upsert annotations accurately describe overwrites and version increments, rather than advertising non-destructive idempotence.
 
 - Dashboard now rejects untrusted Host/Origin headers and locates its static files independently of the invoking client's working directory.
 - Database path settings reject connection URLs and transient storage instead of silently treating them as SQLite filenames; HTTP port settings reject partial numbers.
@@ -33,5 +42,5 @@ All notable changes to AgentStore are documented here. The project follows [Sema
 
 - Loopback defaults, optional bearer-token authentication, environment-only tunnel configuration, and secret/data exclusions.
 
-[Unreleased]: https://github.com/darkrishabh/agentstore/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/darkrishabh/agentstore/releases/tag/v0.2.0
+[Unreleased]: https://github.com/darkrishabh/simpleagentstore/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/darkrishabh/simpleagentstore/releases/tag/v0.2.0

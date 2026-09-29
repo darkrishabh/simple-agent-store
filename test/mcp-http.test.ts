@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { request } from "node:http";
@@ -35,6 +35,8 @@ describe("Streamable HTTP MCP adapter", () => {
       }),
     );
 
+    const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+    expect(client.getServerVersion()).toMatchObject({ name: pkg.name, version: pkg.version });
     const tools = await client.listTools();
     expect(tools.tools.map((tool) => tool.name).sort()).toEqual([
       "delete_object",

@@ -40,7 +40,9 @@ describe("native dashboard configuration", () => {
       child!.once("error", (error) => { clearTimeout(timeout); reject(error); });
       child!.once("exit", (code) => { clearTimeout(timeout); reject(new Error(`Dashboard exited (${code}): ${errors}`)); });
     });
-    expect((await fetch(url)).status).toBe(200);
+    const page = await fetch(url);
+    expect(page.status).toBe(200);
+    expect(await page.text()).toContain("<title>SimpleAgentStore Dashboard</title>");
     expect((await fetch(`${url}/app.js`)).status).toBe(200);
     expect((await fetch(`${url}/api/health`)).status).toBe(200);
     expect((await fetch(`${url}/api/stats`, { headers: { Origin: "https://attacker.example" } })).status).toBe(403);

@@ -1,5 +1,5 @@
 # Merge into your Codex config only if NOT using the bundled plugin.
-[mcp_servers.agentstore]
+[mcp_servers.simpleagentstore]
 url = "http://127.0.0.1:4311/mcp"
 # For an authenticated server, export the token in the environment that runs Codex:
 # bearer_token_env_var = "AGENTSTORE_MCP_TOKEN"

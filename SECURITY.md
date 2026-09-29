@@ -2,18 +2,19 @@
 
 ## Supported versions
 
-AgentStore is pre-1.0 software. Security fixes are applied to the latest minor release on `main`.
+SimpleAgentStore is pre-1.0 software. Security fixes are applied on `main`; releases are listed on GitHub. The 0.3.0 rename is a release candidate until tagged.
 
 | Version | Supported |
 | --- | --- |
-| 0.2.x | Yes |
+| 0.3.x / current main | Yes |
+| 0.2.x | Report issues; upgrade to the latest fixed source |
 | Earlier versions | No |
 
 ## Report a vulnerability privately
 
 Do not open a public issue for a suspected vulnerability or include real credentials, private objects, or database contents in a report.
 
-Use [GitHub private vulnerability reporting](https://github.com/darkrishabh/agentstore/security/advisories/new). Include:
+Use [GitHub private vulnerability reporting](https://github.com/darkrishabh/simpleagentstore/security/advisories/new). Include:
 
 - affected version or commit;
 - reproduction steps or a minimal proof of concept;
@@ -30,7 +31,7 @@ The open-source core is a local-first, single-user MVP—not a hosted multi-tena
 - The dashboard binds to loopback by default and has no application authentication. Compose binds inside the container but publishes on host loopback only. Host/origin checks do not replace authentication.
 - The MCP HTTP adapter binds to loopback by default. A bearer token is required before exposing it through a tunnel.
 - The shared bearer token is development authentication, not user identity or authorization.
-- Object values are not encrypted at rest by AgentStore. Protect the database and backups with operating-system permissions and disk encryption.
+- Object values are not encrypted at rest by SimpleAgentStore. Protect the database and backups with operating-system permissions and disk encryption.
 - Logical TTL hides expired objects but does not securely erase their bytes.
 - A successful delete is not a secure-erasure guarantee; SQLite pages, WAL files, backups, and filesystem snapshots may retain data.
 - Stored text is untrusted input. Agents must not treat retrieved content as instructions or bypass their own authorization and confirmation policies.

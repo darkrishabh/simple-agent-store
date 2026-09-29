@@ -1,8 +1,0 @@
-{
-  "name": "agentstore",
-  "version": "0.2.0",
-  "description": "Local AgentStore MCP connection with reliable save and retrieval routing.",
-  "author": {
-    "name": "Rishabh Mehan"
-  }
-}

@@ -1,0 +1,8 @@
+{
+  "name": "simpleagentstore",
+  "version": "0.3.0",
+  "description": "Local SimpleAgentStore MCP connection with reliable save and retrieval routing.",
+  "author": {
+    "name": "Rishabh Mehan"
+  }
+}

@@ -20,7 +20,7 @@ SQLite is the only implemented backend. There is no Postgres service or database
 
 The image runs as the unprivileged `node` user (UID 1000), with a read-only root filesystem; only the data volume is writable. SQLite WAL files live next to the database in that volume. The dashboard waits for MCP to initialize the database before starting.
 
-This volume is separate from a native checkout's `data/agentstore.sqlite`. Switching from native Node to Docker does not automatically import existing notes. Keep the same Compose project name/directory to reuse the same volume.
+This volume is separate from a native checkout's `data/agentstore.sqlite`. Switching from native Node to Docker does not automatically import existing notes. The default Compose project is explicitly pinned to `agentstore`, preserving the `agentstore_agentstore-data` volume across the repository rename. If you previously used a custom project name (including one derived from a custom checkout folder), keep that exact name with `-p` or `COMPOSE_PROJECT_NAME`. See [the upgrade guide](UPGRADING.md).
 
 ### Existing database or host directory
 

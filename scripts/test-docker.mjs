@@ -54,6 +54,13 @@ async function closeClients() {
 }
 
 try {
+  // Check the real default separately from the isolated test's project override.
+  const configEnv = { ...env };
+  delete configEnv.COMPOSE_PROJECT_NAME;
+  const defaultConfig = JSON.parse(execFileSync("docker", ["compose", "--project-directory", root, "--env-file", envFile, "-f", join(root, "compose.yaml"), "config", "--format", "json"], { env: configEnv, encoding: "utf8" }));
+  assert.equal(defaultConfig.name, "agentstore");
+  assert.equal(defaultConfig.volumes["agentstore-data"].name, "agentstore_agentstore-data");
+  console.log("PASS: repository rename preserves the default Compose data volume.");
   console.log(`Building isolated Docker test stack: ${project}`);
   compose("build");
   started = true;
@@ -76,6 +83,7 @@ try {
 
   const writer = await connect("test-writer");
   const reader = await connect("test-reader");
+  assert.equal(writer.getServerVersion().name, "simpleagentstore");
   assert.equal((await writer.listTools()).tools.length, 5);
   const input = { key: "docker-note", kind: "note", value: { text: "orchid launch checklist" }, searchable_text: "orchid launch checklist", labels: ["docker-test"] };
   await call(writer, "store_object", input);

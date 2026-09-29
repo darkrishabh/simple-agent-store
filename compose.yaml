@@ -1,3 +1,7 @@
+# Stable across the repository rename: existing agentstore_agentstore-data is reused.
+# Keep any previously configured -p / COMPOSE_PROJECT_NAME override on upgrades.
+name: agentstore
+
 services:
   mcp:
     build: .
