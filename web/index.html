@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Manage objects stored by your AI agents." />
-    <title>AgentStore Dashboard</title>
+    <title>SimpleAgentStore Dashboard</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <div class="dashboard-shell">
       <aside class="sidebar">
-        <a class="logo" href="#overview" aria-label="AgentStore dashboard">
+        <a class="logo" href="#overview" aria-label="SimpleAgentStore dashboard">
           <span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span>AgentStore</span>
+          <span>SimpleAgentStore</span>
         </a>
 
         <nav class="sidebar-nav" aria-label="Dashboard navigation">
@@ -34,7 +34,7 @@
       <div class="main-column">
         <header class="topbar">
           <div>
-            <p class="breadcrumb">AgentStore <span>/</span> Overview</p>
+            <p class="breadcrumb">SimpleAgentStore <span>/</span> Overview</p>
             <h1>Dashboard</h1>
           </div>
           <button class="button button-primary" id="new-object-button" type="button"><span>＋</span> New object</button>
@@ -128,7 +128,7 @@
               <div class="empty-state hidden" id="empty-state">
                 <div class="empty-icon">□</div>
                 <h3 id="empty-title">No objects yet</h3>
-                <p id="empty-message">Create your first object here or store one through the AgentStore MCP tools.</p>
+                <p id="empty-message">Create your first object here or store one through the SimpleAgentStore MCP tools.</p>
                 <button class="button button-primary" id="empty-create-button" type="button">Create first object</button>
               </div>
               <div class="loading-state" id="loading-state">Loading objects…</div>
@@ -213,7 +213,7 @@
     <dialog class="delete-dialog" id="delete-dialog">
       <div class="delete-icon">!</div>
       <h2>Delete object?</h2>
-      <p>This will permanently remove <strong id="delete-key">this object</strong> from AgentStore. This action cannot be undone.</p>
+      <p>This will permanently remove <strong id="delete-key">this object</strong> from SimpleAgentStore. This action cannot be undone.</p>
       <div class="delete-actions">
         <button class="button button-secondary" id="cancel-delete" type="button">Cancel</button>
         <button class="button button-danger" id="confirm-delete" type="button">Delete object</button>

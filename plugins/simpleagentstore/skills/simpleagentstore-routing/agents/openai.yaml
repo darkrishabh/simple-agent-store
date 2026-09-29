@@ -1,0 +1,11 @@
+interface:
+  display_name: "SimpleAgentStore Routing"
+  short_description: "Save and retrieve portable user-owned objects"
+  default_prompt: "Use $simpleagentstore-routing to save or retrieve my information."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "simpleagentstore"
+      description: "Connected SimpleAgentStore MCP server with put, get, list, search, and delete tools."
+policy:
+  allow_implicit_invocation: true

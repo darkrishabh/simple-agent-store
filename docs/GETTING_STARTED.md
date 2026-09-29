@@ -1,6 +1,8 @@
 # Connect your agents
 
-AgentStore is a SQLite-backed, single-user object store. PostgreSQL is not implemented. All clients must point to the same server/database for cross-agent retrieval.
+SimpleAgentStore is a SQLite-backed, single-user object store. PostgreSQL is not implemented. All clients must point to the same server/database for cross-agent retrieval.
+
+Upgrading an existing AgentStore installation? Read [the compatibility and plugin transition notes](UPGRADING.md) before installing a second connection.
 
 ## Recommended: Docker and a bundled plugin
 
@@ -20,7 +22,7 @@ Run from the repository root:
 
 ```bash
 codex plugin marketplace add "$PWD"
-codex plugin add agentstore@personal
+codex plugin add simpleagentstore@personal
 ```
 
 The repository's existing Codex marketplace is named `personal`. If a different marketplace with that name is already registered, use the app's plugin installer to select this repository's source explicitly instead of replacing your existing marketplace. Restart/open a new conversation after installation and enable the plugin. The included portable `mcp.json` and legacy `.mcp.json` cover the current and compatibility manifest layouts.
@@ -29,13 +31,13 @@ The repository's existing Codex marketplace is named `personal`. If a different 
 
 ```bash
 claude plugin marketplace add "$PWD"
-claude plugin install agentstore@agentstore-local --scope user
+claude plugin install simpleagentstore@agentstore-local --scope user
 ```
 
 Restart/open a new conversation and enable the plugin. For a session-only development install:
 
 ```bash
-claude --plugin-dir "$PWD/plugins/agentstore"
+claude --plugin-dir "$PWD/plugins/simpleagentstore"
 ```
 
 Both plugins target the default local endpoint without a bearer token. They do not start the server, install themselves into other clients, bypass approvals, or guarantee model tool selection.
@@ -59,13 +61,13 @@ The endpoint is `http://127.0.0.1:4311/mcp`. Keep this process running. Local HT
 ### Claude Code
 
 ```bash
-claude mcp add --transport http --scope user agentstore http://127.0.0.1:4311/mcp
+claude mcp add --transport http --scope user simpleagentstore http://127.0.0.1:4311/mcp
 ```
 
 ### Codex
 
 ```bash
-codex mcp add agentstore --url http://127.0.0.1:4311/mcp
+codex mcp add simpleagentstore --url http://127.0.0.1:4311/mcp
 codex mcp list
 ```
 
@@ -78,7 +80,7 @@ Run these commands from the repository root. The client launches the MCP process
 ### Claude Code
 
 ```bash
-claude mcp add --scope user agentstore \
+claude mcp add --scope user simpleagentstore \
   --env AGENTSTORE_DB_PATH="$PWD/data/agentstore.sqlite" \
   -- npm --silent --prefix "$PWD" run mcp
 ```
@@ -86,12 +88,12 @@ claude mcp add --scope user agentstore \
 ### Codex
 
 ```bash
-codex mcp add agentstore \
+codex mcp add simpleagentstore \
   --env AGENTSTORE_DB_PATH="$PWD/data/agentstore.sqlite" \
   -- npm --silent --prefix "$PWD" run mcp
 ```
 
-Choose one transport for a server named `agentstore`; don't register both under the same name.
+Choose one transport for a server named `simpleagentstore`; don't register both under the same name.
 
 ## Custom endpoint or bearer token
 
@@ -100,7 +102,7 @@ If you change the port, enable authentication, or use HTTPS, register the connec
 For Codex, export `AGENTSTORE_MCP_TOKEN` in the environment that **launches Codex**, then register:
 
 ```bash
-codex mcp add agentstore --url http://127.0.0.1:4311/mcp \
+codex mcp add simpleagentstore --url http://127.0.0.1:4311/mcp \
   --bearer-token-env-var AGENTSTORE_MCP_TOKEN
 ```
 
@@ -111,7 +113,7 @@ For Claude Code, merge this server entry into a private MCP configuration. Claud
 ```json
 {
   "mcpServers": {
-    "agentstore": {
+    "simpleagentstore": {
       "type": "http",
       "url": "http://127.0.0.1:4311/mcp",
       "headers": { "Authorization": "Bearer ${AGENTSTORE_MCP_TOKEN}" }
@@ -120,9 +122,9 @@ For Claude Code, merge this server entry into a private MCP configuration. Claud
 }
 ```
 
-Use the same token on the server. For a token-free custom port, simply change the URL and omit headers. For a locally customized plugin, change the URLs in **both** `plugins/agentstore/mcp.json` and `plugins/agentstore/.mcp.json` before installing; reinstall/update the plugin after source changes because installed plugins may be cached.
+Use the same token on the server. For a token-free custom port, simply change the URL and omit headers. For a locally customized plugin, change the URLs in **both** `plugins/simpleagentstore/mcp.json` and `plugins/simpleagentstore/.mcp.json` before installing; reinstall/update the plugin after source changes because installed plugins may be cached.
 
-The routing skill is also independently distributable from [plugins/agentstore/skills/agentstore-routing](../plugins/agentstore/skills/agentstore-routing). To use it alongside a manual connection without bundling a second MCP connection, copy that directory into the client's supported skills directory (`~/.agents/skills/` for Codex or `~/.claude/skills/` for Claude Code). Check for an existing copy before replacing it.
+The routing skill is also independently distributable from [plugins/simpleagentstore/skills/simpleagentstore-routing](../plugins/simpleagentstore/skills/simpleagentstore-routing). To use it alongside a manual connection without bundling a second MCP connection, copy that directory into the client's supported skills directory (`~/.agents/skills/` for Codex or `~/.claude/skills/` for Claude Code). Check for an existing copy before replacing it.
 
 ## Other MCP clients
 

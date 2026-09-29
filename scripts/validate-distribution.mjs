@@ -11,10 +11,11 @@ function assert(condition, message) {
 }
 
 const pkg = readJson("package.json");
-const portable = readJson("plugins/agentstore/plugin.json");
-const codex = readJson("plugins/agentstore/.codex-plugin/plugin.json");
-const claude = readJson("plugins/agentstore/.claude-plugin/plugin.json");
+const portable = readJson("plugins/simpleagentstore/plugin.json");
+const codex = readJson("plugins/simpleagentstore/.codex-plugin/plugin.json");
+const claude = readJson("plugins/simpleagentstore/.claude-plugin/plugin.json");
 const claudeMarketplace = readJson(".claude-plugin/marketplace.json");
+const codexMarketplace = readJson(".agents/plugins/marketplace.json");
 const requiredFiles = [
   "LICENSE",
   "README.md",
@@ -31,33 +32,40 @@ const requiredFiles = [
   "integrations/codex.toml",
   "integrations/mcp.json",
   "integrations/vscode.mcp.json",
-  "plugins/agentstore/skills/agentstore-routing/SKILL.md",
+  "plugins/simpleagentstore/skills/simpleagentstore-routing/SKILL.md",
 ];
 
 assert(pkg.license === "Apache-2.0", "package.json must declare Apache-2.0");
-assert(pkg.repository?.url === "git+https://github.com/darkrishabh/agentstore.git", "repository URL is missing");
+assert(pkg.name === "simpleagentstore", "package name must match the project");
+assert(pkg.private === true, "source-only release must not accidentally publish to npm");
+assert(pkg.homepage === "https://simpleagentstore.com", "project homepage is incorrect");
+assert(pkg.repository?.url === "git+https://github.com/darkrishabh/simple-agent-store.git", "repository URL is missing");
 for (const [name, manifest] of Object.entries({ portable, codex, claude })) {
-  assert(manifest.name === "agentstore", `${name} manifest has the wrong name`);
+  assert(manifest.name === "simpleagentstore", `${name} manifest has the wrong name`);
   assert(manifest.version === pkg.version, `${name} version ${manifest.version} does not match core ${pkg.version}`);
 }
-const marketplacePlugin = claudeMarketplace.plugins?.find((plugin) => plugin.name === "agentstore");
+const marketplacePlugin = claudeMarketplace.plugins?.find((plugin) => plugin.name === "simpleagentstore");
 assert(marketplacePlugin?.version === pkg.version, "Claude marketplace version does not match core");
+assert(marketplacePlugin.source === "./plugins/simpleagentstore", "Claude marketplace source is incorrect");
+const codexEntry = codexMarketplace.plugins?.find((plugin) => plugin.name === pkg.name);
+assert(codexEntry?.source?.path === "./plugins/simpleagentstore", "Codex marketplace source is incorrect");
+assert(codexEntry?.policy?.installation === "AVAILABLE" && codexEntry?.policy?.authentication === "ON_INSTALL", "Codex marketplace policies are missing");
 for (const file of requiredFiles) assert(existsSync(file), `missing required distribution file: ${file}`);
 
 assert(codex.mcpServers === "./.mcp.json", "Codex compatibility manifest must bundle MCP");
-const portableMcp = readJson("plugins/agentstore/mcp.json");
-const legacyMcp = readJson("plugins/agentstore/.mcp.json");
+const portableMcp = readJson("plugins/simpleagentstore/mcp.json");
+const legacyMcp = readJson("plugins/simpleagentstore/.mcp.json");
 for (const config of [portableMcp, legacyMcp, readJson("integrations/mcp.json")]) {
-  assert(Object.keys(config.mcpServers).join() === "agentstore", "bundle must expose exactly one MCP connection");
-  assert(config.mcpServers.agentstore.url === "http://127.0.0.1:4311/mcp", "bundled connection must stay loopback-only");
-  assert(!config.mcpServers.agentstore.headers, "do not distribute credentials");
+  assert(Object.keys(config.mcpServers).join() === "simpleagentstore", "bundle must expose exactly one MCP connection");
+  assert(config.mcpServers.simpleagentstore.url === "http://127.0.0.1:4311/mcp", "bundled connection must stay loopback-only");
+  assert(!config.mcpServers.simpleagentstore.headers, "do not distribute credentials");
 }
-assert(portableMcp.mcpServers.agentstore.type === "streamable-http", "portable transport must use the portable schema");
-assert(legacyMcp.mcpServers.agentstore.type === "http", "Claude/legacy transport must use http");
-assert(readJson("integrations/vscode.mcp.json").servers.agentstore.url === legacyMcp.mcpServers.agentstore.url, "VS Code endpoint drift");
+assert(portableMcp.mcpServers.simpleagentstore.type === "streamable-http", "portable transport must use the portable schema");
+assert(legacyMcp.mcpServers.simpleagentstore.type === "http", "Claude/legacy transport must use http");
+assert(readJson("integrations/vscode.mcp.json").servers.simpleagentstore.url === legacyMcp.mcpServers.simpleagentstore.url, "VS Code endpoint drift");
 
-const skill = readFileSync("plugins/agentstore/skills/agentstore-routing/SKILL.md", "utf8");
-assert(/^---\n[\s\S]*?^name:\s*agentstore-routing\s*$/m.test(skill), "routing skill frontmatter is invalid");
+const skill = readFileSync("plugins/simpleagentstore/skills/simpleagentstore-routing/SKILL.md", "utf8");
+assert(/^---\n[\s\S]*?^name:\s*simpleagentstore-routing\s*$/m.test(skill), "routing skill frontmatter is invalid");
 assert(/^description:\s*\S+/m.test(skill), "routing skill description is missing");
 
 function sourceFiles(directory = ".") {
@@ -77,7 +85,7 @@ try {
   execFileSync("git", ["rev-parse", "--is-inside-work-tree"], { stdio: "ignore" });
   files = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z"], {
     encoding: "utf8",
-  }).split("\0").filter(Boolean);
+  }).split("\0").filter((file) => file && existsSync(file));
 } catch {
   files = sourceFiles();
 }
@@ -87,6 +95,7 @@ const secretPatterns = [
 ];
 const flagged = [];
 for (const file of files) {
+  assert(!/(^|\/)(?:\.env(?:\..*)?|[^/]+\.(?:sqlite|db)(?:-wal|-shm)?|[^/]+\.log)$/.test(file) || file === ".env.example", `private runtime file in distribution: ${file}`);
   if (/\.(?:png|jpg|jpeg|gif|webp|sqlite|db)$/i.test(file)) continue;
   const content = readFileSync(file, "utf8");
   const macHomePrefix = ["", "Users", ""].join("/");

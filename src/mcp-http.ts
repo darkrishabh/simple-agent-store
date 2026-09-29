@@ -50,7 +50,7 @@ export async function startAgentStoreHttpServer(
     const requestUrl = new URL(request.url ?? "/", `http://${request.headers.host ?? DEFAULT_HOST}`);
     if (requestUrl.pathname === "/health" && request.method === "GET") {
       response.writeHead(200, { "content-type": "application/json; charset=utf-8" });
-      response.end(JSON.stringify({ status: "ok", service: "agentstore-mcp" }));
+      response.end(JSON.stringify({ status: "ok", service: "simpleagentstore-mcp" }));
       return;
     }
 
@@ -70,7 +70,7 @@ export async function startAgentStoreHttpServer(
     }
 
     void handleMcp(request, response).catch((error: unknown) => {
-      console.error("AgentStore MCP request failed", error);
+      console.error("SimpleAgentStore MCP request failed", error);
       if (!response.headersSent) {
         response.writeHead(500, { "content-type": "application/json; charset=utf-8" });
       }
@@ -89,7 +89,7 @@ export async function startAgentStoreHttpServer(
   if (!address || typeof address === "string") {
     await closeHttpServer(httpServer);
     store.close();
-    throw new Error("AgentStore HTTP server did not expose a TCP address");
+    throw new Error("SimpleAgentStore HTTP server did not expose a TCP address");
   }
 
   let closed = false;
@@ -143,7 +143,7 @@ if (directEntryPath === fileURLToPath(import.meta.url)) {
     port: parsedPort,
     host: process.env.AGENTSTORE_MCP_HOST,
   });
-  console.log(`AgentStore MCP listening at ${running.url}`);
+  console.log(`SimpleAgentStore MCP listening at ${running.url}`);
   console.log(`Database: ${databasePath}`);
 
   const shutdown = async () => {

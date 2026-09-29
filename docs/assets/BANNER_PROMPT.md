@@ -1,6 +1,8 @@
-# AgentStore banner
+# SimpleAgentStore banner
 
-Generated with the built-in image-generation tool. The selected output is `agentstore-banner.png`; its original canvas is 2172 × 724 pixels (3:1).
+The current README uses `simpleagentstore-banner.svg`, an editable, self-contained vector illustration authored for this repository. It uses no external fonts, scripts, tracking, or third-party logos. The typography and diagram are source-controlled and covered by the repository license.
+
+The earlier `agentstore-banner.png` is retained as a historical asset. It was generated with the built-in image-generation tool at 2172 × 724 pixels (3:1), using the original AgentStore name. The historical prompt follows.
 
 ## Final prompt
 

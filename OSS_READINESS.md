@@ -1,6 +1,6 @@
 # Open-source readiness
 
-AgentStore 0.2.0 is prepared as an open-source **local alpha**. This document separates source-release readiness from hosted-service readiness.
+SimpleAgentStore 0.3.0 is being prepared as an open-source **local alpha**, not a stable 1.0 or hosted service. A version bump is not a published release; merge passing CI and follow [the release checklist](docs/RELEASING.md) before tagging.
 
 ## Source-release baseline
 
@@ -17,14 +17,27 @@ AgentStore 0.2.0 is prepared as an open-source **local alpha**. This document se
 | Architecture | Ready | Core/adapters boundary, object contract, retrieval pipeline, concurrency, non-goals, and threat model documented. |
 | Operations | Ready for local alpha | Backup, restore, integrity, migrations, locking, corruption recovery, retention, and deletion limitations documented. |
 | Dependency maintenance | Ready | Locked dependencies, CI audit, and weekly Dependabot checks for npm and GitHub Actions. |
-| Release process | Ready | Unified `0.2.0` version and documented maintainer release gate. |
+| Release process | Prepared | Unified `0.3.0` version and documented maintainer release gate; release/tag publication is a separate step. |
 
 Run the local release gate with:
 
 ```bash
 npm ci
 npm run release:check
+npm run test:docker
 ```
+
+## Launch verification — 2026-09-29
+
+- Node.js 22: 51 automated tests pass, including both MCP transports, timezone-aware list filters, filtered pagination, legacy migration and restart persistence.
+- Isolated Docker stack: real MCP SDK clients verified cross-client save/search/get, updates, deletes, pagination, direct database contents, auth, network guards, and data survival after container recreation. The default legacy volume name is also asserted.
+- Codex plugin/skill validators and Claude Code's plugin/marketplace validators pass. These are packaging checks, not a fresh natural-language conversation test in either product.
+- Dependency audit reports zero known vulnerabilities at verification time. Distribution and actual package-manifest checks pass; no user database or environment secrets are included.
+- GitHub repository renamed to `darkrishabh/simple-agent-store`; private vulnerability reporting, secret scanning and push protection confirmed enabled.
+- Dashboard wordmark and new SVG README banner visually checked against an isolated empty database.
+- A clean clone with no local dependencies or environment files passed `npm ci` and the complete release gate.
+
+Before publishing: require both GitHub CI jobs to pass on the final commit and create the release/tag through the documented checklist. Domain registration is not website or hosted-MCP deployment.
 
 ## Explicit alpha limitations
 

@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -26,8 +26,11 @@ describe("MCP adapter", () => {
     });
     client = new Client({ name: "agentstore-test", version: "0.1.0" });
     await client.connect(transport);
+    const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+    expect(client.getServerVersion()).toMatchObject({ name: pkg.name, version: pkg.version });
 
     const tools = await client.listTools();
+    expect(tools.tools.find((tool) => tool.name === "store_object")?.annotations).toMatchObject({ destructiveHint: true, idempotentHint: false });
     expect(tools.tools.map((tool) => tool.name).sort()).toEqual([
       "delete_object",
       "get_object",

@@ -12,13 +12,13 @@ This document describes the open-source local core. It is not a security certifi
 
 ## Trust assumptions
 
-- The operating-system account running AgentStore is trusted.
+- The operating-system account running SimpleAgentStore is trusted.
 - Local filesystem permissions and disk encryption protect data at rest.
 - The default loopback network is not exposed to untrusted machines.
 - Docker's host and containers sharing the Compose project network are trusted. Internal all-interface binding is for port forwarding, not permission to expose unauthenticated services publicly.
 - Connected MCP clients are authorized to access the entire selected database.
 
-AgentStore 0.2.0 has no users, roles, row-level permissions, or tenant boundary.
+SimpleAgentStore 0.2.0 has no users, roles, row-level permissions, or tenant boundary.
 
 ## Principal risks and controls
 

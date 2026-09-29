@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="./docs/assets/agentstore-banner.png" alt="AgentStore — Your data. Any agent." width="100%" />
+  <img src="./docs/assets/simpleagentstore-banner.svg" alt="SimpleAgentStore — Dead simple agent storage. Your data. Any agent." width="100%" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/darkrishabh/agentstore/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/darkrishabh/agentstore/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status" /></a>
+  <a href="https://github.com/darkrishabh/simple-agent-store/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/darkrishabh/simple-agent-store/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-f4b860?style=flat-square" alt="Apache License 2.0" /></a>
   <img src="https://img.shields.io/badge/status-open--source_alpha-6b7280?style=flat-square" alt="Status: open-source alpha" />
   <img src="https://img.shields.io/badge/Node.js-22%2B-339933?style=flat-square" alt="Node.js 22 or later" />
@@ -23,13 +23,17 @@
 
 **One place for the things you tell your agents to keep.**
 
-AgentStore is a small, user-owned object store. Connect your agents to the same store, save something in one conversation, and retrieve it from another agent later. Your data lives in a local SQLite file—not inside a particular agent's chat history.
+SimpleAgentStore is a small, user-owned object store. Connect your agents to the same store, save something in one conversation, and retrieve it from another agent later. Your data lives in a local SQLite file—not inside a particular agent's chat history.
+
+**A shared notepad for your agents—not a memory system.** No embeddings, no RAG pipeline, no silent remembering. Save explicitly. Retrieve when you need it.
+
+Previously named AgentStore? See the [rename and upgrade guide](./docs/UPGRADING.md). Existing database paths and `AGENTSTORE_*` configuration remain supported unchanged.
 
 ### The idea in 10 seconds
 
 | You say | Your connected agent does |
 | --- | --- |
-| “Save this to my notes: the launch checklist is ready.” | Writes a structured note to AgentStore. |
+| “Save this to my notes: the launch checklist is ready.” | Writes a structured note to SimpleAgentStore. |
 | “What did I save about the launch?” | Searches for candidates, then fetches the selected object. |
 | “Show me all my notes.” | Lists your notes, following every cursor page. |
 
@@ -53,8 +57,8 @@ AgentStore is a small, user-owned object store. Connect your agents to the same 
 Requires Docker with Compose v2. No Node.js or database installation needed:
 
 ```bash
-git clone https://github.com/darkrishabh/agentstore.git
-cd agentstore
+git clone https://github.com/darkrishabh/simple-agent-store.git
+cd simple-agent-store
 docker compose up --build -d --wait
 ```
 
@@ -69,8 +73,8 @@ Stop with `docker compose down`; your data stays. See [Docker setup and backups]
 Requires **Node.js 22+**. Do not run this alongside Docker on the same ports:
 
 ```bash
-git clone https://github.com/darkrishabh/agentstore.git
-cd agentstore
+git clone https://github.com/darkrishabh/simple-agent-store.git
+cd simple-agent-store
 npm ci
 npm run dashboard
 ```
@@ -89,7 +93,7 @@ To choose another SQLite file, set `AGENTSTORE_DB_PATH` in `.env` (see [.env.exa
 
 → **[Connect Codex or Claude, install routing plugins, and configure HTTPS](./docs/GETTING_STARTED.md)**
 
-> AgentStore is an open-source alpha for local, single-user use. It is not a production hosted or multi-tenant service.
+> SimpleAgentStore is an open-source alpha for local, single-user use. It is not a production hosted or multi-tenant service.
 
 ## What gets saved?
 
@@ -106,13 +110,13 @@ A predictable envelope around **your** payload:
 }
 ```
 
-AgentStore adds version and timestamp metadata. Kinds are `note`, `todo`, `reminder`, `calendar`, `reference`, and `other`. The value can be any JSON—not just a document or string.
+SimpleAgentStore adds version and timestamp metadata. Kinds are `note`, `todo`, `reminder`, `calendar`, `reference`, and `other`. The value can be any JSON—not just a document or string.
 
 ## Smart agent. Predictable store.
 
 **The agent interprets what you mean. The store executes the query.**
 
-`search` returns compact candidates with scores, matched fields, and snippets. `get` returns the full object. No LLM calls, embeddings, or automatic classification happen inside AgentStore.
+`search` returns compact candidates with scores, matched fields, and snippets. `get` returns the full object. No LLM calls, embeddings, or automatic classification happen inside SimpleAgentStore.
 
 Lexical search has limits: paraphrases and typos may need the calling agent to try shorter terms or close synonyms. A high ranking is a retrieval signal, not proof that an object answers the question.
 
@@ -137,7 +141,7 @@ With Docker running, `npm run test:docker` tests a temporary Compose stack: cros
 
 ## Open-source core
 
-AgentStore is licensed under **[Apache-2.0](./LICENSE)**. Contributions are welcome when they preserve the small deterministic core.
+SimpleAgentStore is licensed under **[Apache-2.0](./LICENSE)**. Contributions are welcome when they preserve the small deterministic core.
 
 - **[Architecture](./docs/ARCHITECTURE.md)** — components, object contract, retrieval, and trust boundaries
 - **[Compatibility](./docs/COMPATIBILITY.md)** — tested runtimes, platforms, clients, and upgrade expectations

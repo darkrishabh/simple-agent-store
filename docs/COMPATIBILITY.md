@@ -1,6 +1,6 @@
 # Compatibility
 
-AgentStore is pre-1.0. This matrix defines what the 0.2.x source release is designed and tested to support.
+SimpleAgentStore is pre-1.0. This matrix defines what the 0.3.x source is designed and tested to support.
 
 ## Runtime
 
@@ -39,7 +39,7 @@ The development Cloudflare tunnel is convenience tooling, not a supported hosted
 
 ## Database upgrades
 
-The latest 0.2.x code supports databases created by the earlier MVP schema through automatic additive migration and index backfill. Downgrade-in-place is not supported. See [Database operations](DATABASE_OPERATIONS.md) for backup and rollback requirements.
+The 0.3.x code supports databases created by the earlier MVP schema through automatic additive migration and index backfill. The rename preserves the 0.2.x data format and default storage paths. Downgrade-in-place after a schema migration is not supported. See [Database operations](DATABASE_OPERATIONS.md) and [upgrading](UPGRADING.md).
 
 ## Versioning
 

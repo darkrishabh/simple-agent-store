@@ -134,7 +134,7 @@ function renderTable() {
   elements.emptyTitle.textContent = filtered ? "No matching objects" : "No objects yet";
   elements.emptyMessage.textContent = filtered
     ? "Try a different search term or remove one of the active filters."
-    : "Create your first object here or store one through the AgentStore MCP tools.";
+    : "Create your first object here or store one through the SimpleAgentStore MCP tools.";
 
   const start = state.serverPaged ? 0 : (state.page - 1) * PAGE_SIZE;
   const visibleResults = state.serverPaged ? state.results : state.results.slice(start, start + PAGE_SIZE);
