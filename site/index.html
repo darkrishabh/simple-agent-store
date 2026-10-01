@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f7">
+  <meta name="description" content="A shared notepad for your AI agents. Save notes, todos and structured objects in your own SQLite store. Open source, local first, with MCP and a dashboard.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SimpleAgentStore | Dead simple agent storage">
+  <meta property="og:description" content="Save in Claude. Find in Codex. One small, user-owned store for the things you ask your agents to keep.">
+  <meta property="og:url" content="https://darkrishabh.github.io/simple-agent-store/">
+  <meta property="og:image" content="https://darkrishabh.github.io/simple-agent-store/assets/shared-store.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://darkrishabh.github.io/simple-agent-store/">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="icon" href="data:,">
+  <title>SimpleAgentStore | Dead simple agent storage</title>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="wordmark" href="./" aria-label="SimpleAgentStore home">Simple<span>Agent</span>Store</a>
+    <nav aria-label="Main navigation">
+      <a href="#how-it-works">How it works</a>
+      <a href="https://github.com/darkrishabh/simple-agent-store/blob/main/docs/GETTING_STARTED.md">Docs</a>
+      <a class="nav-repo" href="https://github.com/darkrishabh/simple-agent-store">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Open source. Local first.</p>
+        <h1 id="hero-title">Dead simple<br><span>agent storage.</span></h1>
+        <p class="hero-description">A shared notepad for your AI agents. Save in one conversation. Find it from another.</p>
+        <div class="actions">
+          <a class="button primary" href="#get-started">Start locally <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://github.com/darkrishabh/simple-agent-store">Explore the code <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="hero-art">
+        <img src="./assets/shared-store.jpg" width="1448" height="1086" fetchpriority="high" alt="Conceptual illustration of several agent terminals connected to one shared box of stored objects.">
+      </figure>
+    </section>
+
+    <aside class="launch-note wrap" aria-label="Project status">
+      <strong>A small, working OSS alpha.</strong>
+      <p>Self-hosted, single-user, SQLite only. No hosted account or managed service required. <a href="https://github.com/darkrishabh/simple-agent-store/blob/main/OSS_READINESS.md">Read the boundaries <span aria-hidden="true">↗</span></a></p>
+    </aside>
+
+    <section class="section wrap" id="how-it-works" aria-labelledby="workflow-title">
+      <div class="section-heading">
+        <h2 id="workflow-title">Switch agents.<br>Keep your stuff.</h2>
+        <p>Connect your agents to the same store. Your saved information belongs to you, not to a chat thread.</p>
+      </div>
+      <div class="example-layout">
+        <div class="exchange">
+          <p class="example-label">An example, not a live chat</p>
+          <div class="exchange-item">
+            <span class="client-label">In Claude</span>
+            <blockquote>“Save this to my notes: the orchid launch checklist is ready.”</blockquote>
+            <p><code>store_object</code> writes a note to your store.</p>
+          </div>
+          <div class="exchange-item">
+            <span class="client-label">Later, in Codex</span>
+            <blockquote>“Find my note about the orchid launch.”</blockquote>
+            <p><code>search_objects</code> finds it. <code>get_object</code> reads the full value.</p>
+          </div>
+          <p class="muted">The optional routing skill helps choose tools. Only a successful tool response confirms a save.</p>
+        </div>
+        <div class="object-example">
+          <div class="object-heading"><span>What you store</span><span class="filetype">JSON</span></div>
+          <pre aria-label="Example object"><code>{
+  <span class="code-key">"key"</span>: "notes/orchid-launch",
+  <span class="code-key">"kind"</span>: "note",
+  <span class="code-key">"labels"</span>: ["orchid", "launch"],
+  <span class="code-key">"value"</span>: {
+    "text": "The launch checklist is ready."
+  }
+}</code></pre>
+          <p>Your payload, inside a predictable envelope. The store adds IDs, versions and timestamps. Writes also provide searchable text.</p>
+          <div class="object-kinds" aria-label="Supported object kinds"><span>notes</span><span>todos</span><span>reminders</span><span>calendar</span><span>references</span><span>other</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section capabilities wrap" aria-labelledby="core-title">
+      <div class="section-heading">
+        <h2 id="core-title">Storage, without the extra system.</h2>
+        <p>No embeddings. No RAG pipeline. No silent remembering. Just five operations over objects you can inspect.</p>
+      </div>
+      <dl class="operations">
+        <div><dt>put</dt><dd>Save or replace an object by key.</dd></div>
+        <div><dt>get</dt><dd>Read the complete saved value.</dd></div>
+        <div><dt>list</dt><dd>Browse every matching page.</dd></div>
+        <div><dt>search</dt><dd>Find lightweight candidates.</dd></div>
+        <div><dt>delete</dt><dd>Remove an object by key.</dd></div>
+      </dl>
+      <div class="principles">
+        <article><h3>Retrieval you can inspect</h3><p>Your agent interprets the request. The store runs structured filters and lexical search. Search returns candidates; get returns the full object.</p><a href="https://github.com/darkrishabh/simple-agent-store/blob/main/docs/ARCHITECTURE.md">Read the architecture <span aria-hidden="true">↗</span></a></article>
+        <article><h3>A file you control</h3><p>SQLite storage, a local CRUD dashboard, and MCP adapters for stdio or HTTP. The core does not depend on an AI provider.</p><a href="https://github.com/darkrishabh/simple-agent-store/blob/main/docs/DATABASE_OPERATIONS.md">Back up your store <span aria-hidden="true">↗</span></a></article>
+      </div>
+    </section>
+
+    <section class="section wrap setup" id="get-started" aria-labelledby="setup-title">
+      <div class="section-heading">
+        <p class="eyebrow">From clone to your first save</p>
+        <h2 id="setup-title">Bring Docker. That's it.</h2>
+        <p>Two local services. One persistent SQLite volume. No database credentials or model API key needed by the store.</p>
+      </div>
+      <div class="command-block">
+        <div class="command-heading"><span>Run in your terminal</span><button type="button" id="copy-command" hidden>Copy commands</button></div>
+        <pre><code id="start-command">git clone https://github.com/darkrishabh/simple-agent-store.git
+cd simple-agent-store
+docker compose up --build -d --wait</code></pre>
+      </div>
+      <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      <div class="endpoints">
+        <p><span>Open your dashboard</span><code>http://127.0.0.1:4310</code></p>
+        <p><span>Connect your MCP client</span><code>http://127.0.0.1:4311/mcp</code></p>
+      </div>
+      <p class="setup-footnote">Requires Docker with Compose v2. Prefer native Node.js? <a href="https://github.com/darkrishabh/simple-agent-store/blob/main/README.md#native-nodejs">Follow the Node.js setup.</a> Stop with <code>docker compose down</code>; the volume stays.</p>
+      <div class="connection-guide">
+        <h3>Then connect your agents.</h3>
+        <p>Bundled Codex and Claude Code plugins include the local MCP connection and save/retrieve skill. Other MCP clients can connect directly.</p>
+        <a class="button secondary" href="https://github.com/darkrishabh/simple-agent-store/blob/main/docs/GETTING_STARTED.md">Connect your agents <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="section wrap faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">Small by design.</h2>
+      <div>
+        <details open><summary>Is this an AI memory system?</summary><p>No. Nothing is saved implicitly. Agents write explicit objects when you ask them to, and retrieve them using tools. There is no hidden memory extraction or knowledge graph.</p></details>
+        <details><summary>How good is retrieval?</summary><p>The store supports structured filters, SQLite FTS5, label prefixes, and phone/email/URL shape matching. It is lexical, not semantic: paraphrases and typos can miss. Agents can retry with shorter queries or synonyms. Complete lists use cursor pagination.</p></details>
+        <details><summary>Can I expose it publicly?</summary><p>This alpha is designed for local, single-user use. The dashboard has no login. The core does not include OAuth, tenant isolation, rate limiting or managed backups. A development MCP tunnel is not a production hosted service.</p></details>
+        <details><summary>Do all agents save automatically?</summary><p>No. Plugins and server instructions help with tool selection, but client permissions, approvals and model behavior still apply. Verify the tool result or inspect the dashboard. Browser-hosted agents cannot access your computer's localhost directly.</p></details>
+        <details><summary>What does the license allow?</summary><p>The core is open source under Apache-2.0. You can inspect, self-host and contribute. <a href="https://github.com/darkrishabh/simple-agent-store/blob/main/LICENSE">Read the license</a> for its terms.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer wrap">
+    <div><a class="wordmark" href="./">Simple<span>Agent</span>Store</a><p>Your data. Any agent.</p></div>
+    <nav aria-label="Project links"><a href="https://github.com/darkrishabh/simple-agent-store/blob/main/CONTRIBUTING.md">Contribute</a><a href="https://github.com/darkrishabh/simple-agent-store/issues">Feedback</a><a href="https://github.com/darkrishabh/simple-agent-store/security/policy">Security</a></nav>
+  </footer>
+</body>
+</html>
