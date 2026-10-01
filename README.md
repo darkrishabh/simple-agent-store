@@ -12,6 +12,7 @@
 </p>
 
 <p align="center">
+  <a href="https://darkrishabh.github.io/simple-agent-store/">Project website</a> ·
   <a href="#the-idea-in-10-seconds">The idea</a> ·
   <a href="#try-it-locally">Quick start</a> ·
   <a href="./docs/GETTING_STARTED.md">Connect your agents</a> ·

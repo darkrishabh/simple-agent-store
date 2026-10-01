@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://darkrishabh.github.io/simple-agent-store/sitemap.xml

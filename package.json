@@ -23,7 +23,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
-    "ci": "npm run check && npm test && npm run build && npm run validate:distribution && npm run docs:check",
+    "ci": "npm run check && npm test && npm run build && npm run validate:distribution && npm run docs:check && npm run site:check",
+    "site:check": "node scripts/check-site.mjs",
     "dashboard": "node --env-file-if-exists=.env --env-file-if-exists=.env.local --import tsx src/dashboard-server.ts",
     "docs:check": "node scripts/check-docs.mjs",
     "mcp": "node --env-file-if-exists=.env --env-file-if-exists=.env.local --import tsx src/mcp.ts",
