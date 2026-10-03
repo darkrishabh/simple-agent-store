@@ -13,6 +13,7 @@ assert.match(html, /rel="canonical" href="https:\/\/darkrishabh.github.io\/simpl
 assert.match(html, /single-user/);
 assert.match(html, /lexical, not semantic/);
 assert.match(html, /not a live chat/);
+assert.match(html, /class="button secondary" href="https:\/\/simpleagentstore\.com">Use Cloud Hosted /, "Hero cloud CTA must link to the hosted website");
 for (const [, target] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
   if (target.startsWith("https://")) continue;
   if (target === "data:,") continue; // Empty favicon avoids an implicit missing /favicon.ico.
