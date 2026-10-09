@@ -4,9 +4,11 @@ All notable changes to SimpleAgentStore are documented here. The project follows
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-09
+
 ### Changed
 
-- Renamed the project, GitHub repository, dashboard, MCP identity and distributed plugins to SimpleAgentStore (`simpleagentstore`); prepared version 0.3.0 and the `simpleagentstore.com` homepage metadata.
+- Renamed the project, GitHub repository, dashboard, MCP identity and distributed plugins to SimpleAgentStore (`simpleagentstore`), with the `simpleagentstore.com` homepage metadata.
 - Kept `AGENTSTORE_*`, the SQLite filename, core class and five tool names compatible. Pinned the original Compose project name to avoid silently replacing the default data volume after a folder rename. Added upgrade instructions for existing installs and custom project names.
 - Updated the README banner and added a fail-closed package-content check to the release gate and CI.
 
@@ -16,15 +18,20 @@ All notable changes to SimpleAgentStore are documented here. The project follows
 - Docker Compose setup with persistent shared SQLite storage, health checks, non-root runtime, and loopback-only published ports.
 - Bundled local MCP connections in Codex/Claude plugins plus standalone MCP configuration examples for Codex, Claude-compatible clients, and VS Code.
 - Shared native database/port configuration, environment-file examples, Docker operations documentation, and isolated Docker end-to-end tests in CI.
+- Public GitHub Pages landing page with examples, setup instructions, and a cloud-hosted solution link.
 
 ### Fixed
 
 - List due-date filters now normalize timezone offsets consistently with search and reject invalid dates.
 - MCP upsert annotations accurately describe overwrites and version increments, rather than advertising non-destructive idempotence.
-
 - Dashboard now rejects untrusted Host/Origin headers and locates its static files independently of the invoking client's working directory.
 - Database path settings reject connection URLs and transient storage instead of silently treating them as SQLite filenames; HTTP port settings reject partial numbers.
 - MCP server version now matches the core and plugin manifests.
+
+### Security
+
+- Updated the development MCP client to 2.3.1 to address GHSA-6qxp-vccf-f47h.
+- Updated locked `hono` to 4.13.13 and `source-map-js` to 1.2.2 to address GHSA-hxh3-vqpv-xpqv and GHSA-68fv-2mgg-jv7q. The full dependency audit reports zero known vulnerabilities at release verification time.
 
 ## [0.2.0] - 2026-09-23
 
@@ -42,5 +49,6 @@ All notable changes to SimpleAgentStore are documented here. The project follows
 
 - Loopback defaults, optional bearer-token authentication, environment-only tunnel configuration, and secret/data exclusions.
 
-[Unreleased]: https://github.com/darkrishabh/simple-agent-store/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/darkrishabh/simple-agent-store/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/darkrishabh/simple-agent-store/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/darkrishabh/simple-agent-store/releases/tag/v0.2.0

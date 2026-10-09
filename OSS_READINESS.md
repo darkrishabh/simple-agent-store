@@ -1,6 +1,6 @@
 # Open-source readiness
 
-SimpleAgentStore 0.3.0 is being prepared as an open-source **local alpha**, not a stable 1.0 or hosted service. A version bump is not a published release; merge passing CI and follow [the release checklist](docs/RELEASING.md) before tagging.
+SimpleAgentStore 0.3.0 is an open-source **local alpha**, not a stable 1.0 or hosted service. This document records source verification; published versions are listed on [GitHub Releases](https://github.com/darkrishabh/simple-agent-store/releases). Maintainers must follow [the release checklist](docs/RELEASING.md) before tagging.
 
 ## Source-release baseline
 
@@ -17,7 +17,7 @@ SimpleAgentStore 0.3.0 is being prepared as an open-source **local alpha**, not 
 | Architecture | Ready | Core/adapters boundary, object contract, retrieval pipeline, concurrency, non-goals, and threat model documented. |
 | Operations | Ready for local alpha | Backup, restore, integrity, migrations, locking, corruption recovery, retention, and deletion limitations documented. |
 | Dependency maintenance | Ready | Locked dependencies, CI audit, and weekly Dependabot checks for npm and GitHub Actions. |
-| Release process | Prepared | Unified `0.3.0` version and documented maintainer release gate; release/tag publication is a separate step. |
+| Release process | Ready for source alpha | Unified `0.3.0` version, dated changelog, and documented maintainer release gate; release/tag publication is a separate step. |
 
 Run the local release gate with:
 
@@ -27,14 +27,14 @@ npm run release:check
 npm run test:docker
 ```
 
-## Launch verification — 2026-09-29
+## Launch verification — 2026-10-09
 
 - Node.js 22: 51 automated tests pass, including both MCP transports, timezone-aware list filters, filtered pagination, legacy migration and restart persistence.
 - Isolated Docker stack: real MCP SDK clients verified cross-client save/search/get, updates, deletes, pagination, direct database contents, auth, network guards, and data survival after container recreation. The default legacy volume name is also asserted.
-- Codex plugin/skill validators and Claude Code's plugin/marketplace validators pass. These are packaging checks, not a fresh natural-language conversation test in either product.
+- Distribution and Codex skill validators and Claude Code's plugin/marketplace validators pass. A fresh Claude natural-language conversation was not rerun because Claude CLI is not authenticated on the verification machine; packaging and MCP protocol checks do not substitute for that test.
+- Codex CLI, with the bundled routing skill and an isolated MCP connection, saved an ordinary "save this to my notes" request after explicit test-only tool approval. A separate fresh conversation used `search_objects` then `get_object` to return the saved code; direct SQLite inspection confirmed the note, value, labels, and version. This is a bounded smoke test, not a guarantee of model routing in every conversation.
 - Dependency audit reports zero known vulnerabilities at verification time. Distribution and actual package-manifest checks pass; no user database or environment secrets are included.
-- GitHub repository renamed to `darkrishabh/simple-agent-store`; private vulnerability reporting, secret scanning and push protection confirmed enabled.
-- Dashboard wordmark and new SVG README banner visually checked against an isolated empty database.
+- GitHub repository renamed to `darkrishabh/simple-agent-store`; repository security settings and the dashboard/banner branding were verified during the September launch preparation.
 - A clean clone with no local dependencies or environment files passed `npm ci` and the complete release gate.
 
 Before publishing: require both GitHub CI jobs to pass on the final commit and create the release/tag through the documented checklist. Domain registration is not website or hosted-MCP deployment.
